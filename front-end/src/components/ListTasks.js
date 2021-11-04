@@ -1,3 +1,4 @@
+import '../App.css';
 import React, { useState, useEffect } from 'react';
 
 function ListTasks() {
@@ -13,7 +14,7 @@ function ListTasks() {
   }, [])
 
   return (
-    <ul>
+    <ul className="lista">
       {
         tasks.map((t) => (
           <li key={ t.id }>Nome: { t.name } | Tarefa: { t.task } </li>

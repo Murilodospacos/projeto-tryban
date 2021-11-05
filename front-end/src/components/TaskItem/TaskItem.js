@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./taskitem.css";
 
-export default function TaskItem({ id, title, taskState, onTaskUpdate }) {
+export default function TaskItem({ id, title, taskState, onTaskUpdate, onDeleteTask }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editableTitleTask, setEditableTitleTask] = useState(title);
 
@@ -15,6 +15,9 @@ export default function TaskItem({ id, title, taskState, onTaskUpdate }) {
   const onKeyPress = (event) => {
     if (event.key === 'Enter') {
       setIsEditing(false);
+      if (editableTitleTask.length === 0) {
+        onDeleteTask(id);
+      }
     }
   }
 
@@ -24,16 +27,18 @@ export default function TaskItem({ id, title, taskState, onTaskUpdate }) {
 
   if (isEditing) {
     return (
-      <input
-        type="text"
-        value={ editableTitleTask }
-        onChange={ onTitleChangeTask }
-        onKeyPress={ onKeyPress }
-      />
+      <div className="taskitem">
+        <input
+          type="text"
+          value={ editableTitleTask }
+          onChange={ onTitleChangeTask }
+          onKeyPress={ onKeyPress }
+        />
+      </div>
       );
     } else {
       return(
-        <div>
+        <div className="taskitem">
           <div onClick={ (e) => setIsEditing(true) }> { editableTitleTask } </div>
           <select onChange={ onTaskStateChange }  value={ taskState } >
             <option value="Pendente">Pendente</option>

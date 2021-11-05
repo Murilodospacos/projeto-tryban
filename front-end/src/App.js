@@ -26,7 +26,6 @@ function App() {
   }
 
   const updateTask = (id, title, state) => {
-    console.log("update task sendo chamada");
     setTasks((existingTasks) => {
       return existingTasks.map((task) => {
         if (task.id === id) {
